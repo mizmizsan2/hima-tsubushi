@@ -96,51 +96,71 @@ class object {
         }
     }
 }
+
+
 function setup() {
     createCanvas(390, 800);
     background(0);
 
     scoreResult = 0;
+    scene = "start";
 
 
 }
 
 function draw() {
-    background(180, 180, 255);
+    if (scene == "start")
+        startScene();
 
-    // background(0);
-    fill(255);
-    translate(12, 12);
-    // 現在のキャンバスの原点を左上隅とする矩形を描く
-    // if(c.length > 0){
-    for (let i = 0; i < 5; i++) {
-        c1.push(new object(0, 0, random(-4, 4), random(-4, 4), 60)); //pushは関数
-        c1[i].moveUp();
-        if (c1[i].del() == 1 && mouseIsPressed) {
-            c1.splice(i, 1);
-            console.log('up');
-            scoreCal(10);
-        }
-    }
+    if (scene == "play") {
+        background(180, 180, 255);
 
-    for (let i = 0; i < 5; i++) {
-        c1.push(new object(0, 0, random(-4, 4), random(-4, 4), 60)); //pushは関数
-        c1[i].moveDown();
-        if (c1[i].del() == 2 && mouseIsPressed) {
-            c1.splice(i, 1);
-            console.log('down');
-            scoreCal(-10);
+        // background(0);
+        fill(255);
+        translate(12, 12);
+        // 現在のキャンバスの原点を左上隅とする矩形を描く
+        // if(c.length > 0){
+        for (let i = 0; i < 5; i++) {
+            c1.push(new object(0, 0, random(-4, 4), random(-4, 4), 60)); //pushは関数
+            c1[i].moveUp();
+            if (c1[i].del() == 1 && mouseIsPressed) {
+                c1.splice(i, 1);
+                console.log('up');
+                scoreCal(10);
+            }
         }
+
+        for (let i = 0; i < 5; i++) {
+            c1.push(new object(0, 0, random(-4, 4), random(-4, 4), 60)); //pushは関数
+            c1[i].moveDown();
+            if (c1[i].del() == 2 && mouseIsPressed) {
+                c1.splice(i, 1);
+                console.log('down');
+                scoreCal(-10);
+            }
+        }
+        scoreText();
     }
-    scoreText();
 }
 
-function scoreCal(score){
+function scoreCal(score) {
     scoreResult += score;
 }
 
-function scoreText(){
+function scoreText() {
     fill(0);
     textSize(24);
-    text("score→"+scoreResult, 10 ,30);
+    text("score→" + scoreResult, 10, 30);
 }
+
+function startScene() {
+    background(255, 0, 255);
+    fill(0);
+    textSize(48);
+    text("スタート画面", 50, 400);
+    text("Enter押せ", 50, 500);
+    if (keyIsPressed)
+        scene = "play";
+
+}
+
