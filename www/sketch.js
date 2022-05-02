@@ -1,5 +1,10 @@
 
 let c1 = []; //配列に
+let c2 = [];
+
+let timeLimit = 10;
+let time;
+
 
 class object {
     constructor(x, y, mx, my, s) {
@@ -105,7 +110,6 @@ function setup() {
     scoreResult = 0;
     scene = "start";
 
-
 }
 
 function draw() {
@@ -121,7 +125,7 @@ function draw() {
         // 現在のキャンバスの原点を左上隅とする矩形を描く
         // if(c.length > 0){
         for (let i = 0; i < 5; i++) {
-            c1.push(new object(0, 0, random(-4, 4), random(-4, 4), 60)); //pushは関数
+            c1.push(new object(0, 0, random(-4, 4), random(-4, 4), 80)); //pushは関数
             c1[i].moveUp();
             if (c1[i].del() == 1 && mouseIsPressed) {
                 c1.splice(i, 1);
@@ -131,16 +135,23 @@ function draw() {
         }
 
         for (let i = 0; i < 5; i++) {
-            c1.push(new object(0, 0, random(-4, 4), random(-4, 4), 60)); //pushは関数
-            c1[i].moveDown();
-            if (c1[i].del() == 2 && mouseIsPressed) {
-                c1.splice(i, 1);
+            c2.push(new object(0, 0, random(-4, 4), random(-4, 4), 60)); //pushは関数
+            c2[i].moveDown();
+            if (c2[i].del() == 2 && mouseIsPressed) {
+                c2.splice(i, 1);
                 console.log('down');
                 scoreCal(-10);
             }
         }
         scoreText();
+        time = timeLimit - millis() / 1000;
+        text("制限時間→ " + int(time), 100, 200);
+        if (time <= 0)
+            scene = "result"
     }
+    
+    if (scene == "result")
+        endScene();
 }
 
 function scoreCal(score) {
@@ -162,5 +173,12 @@ function startScene() {
     if (keyIsPressed)
         scene = "play";
 
+}
+
+function endScene() {
+    background(0);
+    fill(255);
+    text("結果", 50, 400);
+    text(scoreResult + "pt", 50, 500);
 }
 
