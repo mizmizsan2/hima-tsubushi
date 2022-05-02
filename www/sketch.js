@@ -2,8 +2,10 @@
 let c1 = []; //配列に
 let c2 = [];
 
-let timeLimit = 10;
+let timeLimit = 11;
 let time;
+
+let timeBegin;
 
 
 class object {
@@ -117,6 +119,7 @@ function draw() {
         startScene();
 
     if (scene == "play") {
+
         background(180, 180, 255);
 
         // background(0);
@@ -144,12 +147,12 @@ function draw() {
             }
         }
         scoreText();
-        time = timeLimit - millis() / 1000;
+        time = timeLimit - (millis() - timeBegin) / 1000;
         text("制限時間→ " + int(time), 100, 200);
         if (time <= 0)
             scene = "result"
     }
-    
+
     if (scene == "result")
         endScene();
 }
@@ -170,8 +173,10 @@ function startScene() {
     textSize(48);
     text("スタート画面", 50, 400);
     text("Enter押せ", 50, 500);
-    if (keyIsPressed)
+    if (keyIsPressed) {
+        timeBegin = millis();
         scene = "play";
+    }
 
 }
 
