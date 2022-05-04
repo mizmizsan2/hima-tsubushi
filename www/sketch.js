@@ -155,6 +155,7 @@ function draw() {
 
     if (scene == "result")
         endScene();
+
 }
 
 function scoreCal(score) {
@@ -172,8 +173,8 @@ function startScene() {
     fill(0);
     textSize(48);
     text("スタート画面", 50, 400);
-    text("Enter押せ", 50, 500);
-    if (keyIsPressed) {
+    text("「p」押せ", 50, 500);
+    if (keyIsPressed && key == 'p') {
         timeBegin = millis();
         scene = "play";
     }
@@ -185,5 +186,18 @@ function endScene() {
     fill(255);
     text("結果", 50, 400);
     text(scoreResult + "pt", 50, 500);
+    text("スタート画面→「s」", 50, 600);
+    text("コンティニュー→「c」", 50, 700);
+    if (keyIsPressed) {
+        if (key == 'c') {
+            scoreResult = 0;
+            timeBegin = millis();
+            scene = "play";
+        }
+        if (key == 's') {
+            scoreResult = 0;
+            scene = "start";
+        }
+    }
 }
 
