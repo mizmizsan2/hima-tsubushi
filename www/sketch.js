@@ -7,7 +7,7 @@ let time;
 let timeBegin;
 
 
-class object {
+class Circle {
     constructor(x, y, mx, my, s) {
         this.x1 = x;
         this.y1 = y;
@@ -122,10 +122,6 @@ async function setup() {
         if (highScore < data[s].score)
             highScore = data[s].score;
     }
-
-
-
-
     console.log(highScore);
 
 }
@@ -144,7 +140,7 @@ async function draw() {
         // 現在のキャンバスの原点を左上隅とする矩形を描く
         // if(c.length > 0){
         for (let i = 0; i < 5; i++) {
-            c1.push(new object(0, 0, random(-4, 4), random(-4, 4), 80)); //pushは関数
+            c1.push(new Circle(0, 0, random(-4, 4), random(-4, 4), 80)); //pushは関数
             c1[i].moveUp();
             if (c1[i].del() == 1 && mouseIsPressed) {
                 c1.splice(i, 1);
@@ -154,7 +150,7 @@ async function draw() {
         }
 
         for (let i = 0; i < 5; i++) {
-            c2.push(new object(0, 0, random(-4, 4), random(-4, 4), 60)); //pushは関数
+            c2.push(new Circle(0, 0, random(-4, 4), random(-4, 4), 60)); //pushは関数
             c2[i].moveDown();
             if (c2[i].del() == 2 && mouseIsPressed) {
                 c2.splice(i, 1);
@@ -182,29 +178,29 @@ function scoreCal(score) {
     scoreResult += score;
 }
 
-async function scoreText() {
+function scoreText() {
     fill(0);
     textSize(24);
     text("score→" + scoreResult, 10, 30);
     text("high score→" + highScore, 10, 70);
 }
 
-async function startScene() {
+function startScene() {
     background(255, 0, 255);
     fill(0);
     textSize(48);
 
 
     text("スタート画面", 50, 400);
-    text("「p」押して", 50, 500);
-    if (keyIsPressed && key == 'p') {
+    text("画面タップして", 30, 500);
+    if (mouseIsPressed) {
         timeBegin = millis();
         scene = "play";
     }
 
 }
 
-async function endScene() {
+function endScene() {
     background(0);
 
     if (scoreResult > highScore) {
@@ -212,23 +208,34 @@ async function endScene() {
         text("new score!!!", 150, 500)
     }
 
+
+
+    //スタート、コンティニューボタン
+    fill(0, 255, 0);
+    ellipse(65, 590, 70, 70);
+
+    fill(0, 0, 255);
+    ellipse(65, 693, 70, 70);
+
+
+
+
     fill(255);
     text("high score→" + highScore, 10, 70);
-
-    text("結果", 50, 400);
-    text("スタート画面→「s」", 50, 600);
-    text("コンティニュー→「c」", 50, 700);
+    text("結果", 50, 450);
+    text("ｓ   ←スタート画面", 50, 600);
+    text("ｃ   ←コンティニュー", 50, 700);
     textSize(30);
     text(scoreResult + "pt", 50, 500);
-    if (keyIsPressed) {
-        if (key == 'c') {
+    if (mouseIsPressed) {
+        if (dist(65, 693, mouseX, mouseY) <= 70) {
             if (scoreResult > highScore)
                 highScore = scoreResult;
             scoreResult = 0;
             timeBegin = millis();
             scene = "play";
         }
-        if (key == 's') {
+        if (dist(65, 590, mouseX, mouseY) <= 70) {
             if (scoreResult > highScore)
                 highScore = scoreResult;
             scoreResult = 0;
