@@ -137,7 +137,6 @@ async function draw() {
         // background(0);
         fill(255);
         translate(12, 12);
-        // 現在のキャンバスの原点を左上隅とする矩形を描く
         // if(c.length > 0){
         for (let i = 0; i < 5; i++) {
             c1.push(new Circle(0, 0, random(-4, 4), random(-4, 4), 80)); //pushは関数
