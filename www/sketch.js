@@ -181,7 +181,6 @@ function scoreText() {
     fill(0);
     textSize(24);
     text("score→" + scoreResult, 10, 30);
-    text("high score→" + highScore, 10, 70);
 }
 
 function startScene() {

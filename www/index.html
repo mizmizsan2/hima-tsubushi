@@ -8,14 +8,13 @@
     <script src="components/loader.js"></script>
     <link rel="stylesheet" href="components/loader.css">
     <link rel="stylesheet" href="css/style.css">
-    <!-- <script src="../p5.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <script>
         const {
             createClient
         } = supabase
-        const _supabase = createClient(ｘｘｘ)
+        const _supabase = createClient('https://wcsfcrudbhfcganbtqcs.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indjc2ZjcnVkYmhmY2dhbmJ0cWNzIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDk4NTc5MjcsImV4cCI6MTk2NTQzMzkyN30.shhzM8dK_Zm9MOZBfifOlmCJq6-1mC4HH5mtSxWiKTs')
 
         console.log('Supabase Instance: ', _supabase)
             // ...
